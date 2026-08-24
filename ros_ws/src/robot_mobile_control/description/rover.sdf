@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.9">
+  <world name="rover_world">
+
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-6 2.3e-5 -4.2e-5</magnetic_field>
+
+    <physics name="1ms" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.75 0.8 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <plugin filename="gz-sim-physics-system"
+            name="gz::sim::systems::Physics">
+      <engine>
+        <filename>gz-physics-dartsim-plugin</filename>
+      </engine>
+    </plugin>
+    <plugin filename="gz-sim-user-commands-system"
+            name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system"
+            name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-imu-system"
+            name="gz::sim::systems::Imu"/>
+
+    <!-- Keyboard → /cmd_vel  (enable "Key Publisher" in Gazebo GUI) -->
+    <!-- Arrow Up / W -->
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+      <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">16777235</match>
+      </input>
+      <output type="gz.msgs.Twist" topic="/cmd_vel">
+        linear: {x: 0.8}, angular: {z: 0.0}
+      </output>
+    </plugin>
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+      <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">87</match>
+      </input>
+      <output type="gz.msgs.Twist" topic="/cmd_vel">
+        linear: {x: 0.8}, angular: {z: 0.0}
+      </output>
+    </plugin>
+    <!-- Arrow Down / S -->
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+      <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">16777237</match>
+      </input>
+      <output type="gz.msgs.Twist" topic="/cmd_vel">
+        linear: {x: -0.8}, angular: {z: 0.0}
+      </output>
+    </plugin>
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+      <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">83</match>
+      </input>
+      <output type="gz.msgs.Twist" topic="/cmd_vel">
+        linear: {x: -0.8}, angular: {z: 0.0}
+      </output>
+    </plugin>
+    <!-- Arrow Left / A -->
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+      <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">16777234</match>
+      </input>
+      <output type="gz.msgs.Twist" topic="/cmd_vel">
+        linear: {x: 0.0}, angular: {z: 0.8}
+      </output>
+    </plugin>
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+      <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">65</match>
+      </input>
+      <output type="gz.msgs.Twist" topic="/cmd_vel">
+        linear: {x: 0.0}, angular: {z: 0.8}
+      </output>
+    </plugin>
+    <!-- Arrow Right / D -->
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+      <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">16777236</match>
+      </input>
+      <output type="gz.msgs.Twist" topic="/cmd_vel">
+        linear: {x: 0.0}, angular: {z: -0.8}
+      </output>
+    </plugin>
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+      <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">68</match>
+      </input>
+      <output type="gz.msgs.Twist" topic="/cmd_vel">
+        linear: {x: 0.0}, angular: {z: -0.8}
+      </output>
+    </plugin>
+    <!-- Space = stop -->
+    <plugin filename="gz-sim-triggered-publisher-system"
+            name="gz::sim::systems::TriggeredPublisher">
+      <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">32</match>
+      </input>
+      <output type="gz.msgs.Twist" topic="/cmd_vel">
+        linear: {x: 0.0}, angular: {z: 0.0}
+      </output>
+    </plugin>
+
+    <model name="ground">
+      <static>true</static>
+      <pose>0 0 -0.05 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>100 100 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>1.0</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>100 100 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.15 0.15 0.15 1</ambient>
+            <diffuse>0.25 0.25 0.25 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 -0.5 -1</direction>
+    </light>
+
+    <model name="rover">
+      <pose>0 0 0.30 0 0 0</pose>
+      <self_collide>false</self_collide>
+
+      <link name="base_link">
+        <inertial>
+          <mass>8.0</mass>
+          <inertia>
+            <ixx>0.47</ixx>
+            <iyy>1.35</iyy>
+            <izz>1.73</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="base_collision">
+          <pose>0 0 0.06 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.4 0.8 0.25</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="base_visual">
+          <pose>0 0 0.06 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.4 0.8 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.10 0.15 1</ambient>
+            <diffuse>0.05 0.20 0.35 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <link name="left_front_wheel">
+        <pose relative_to="base_link">0.48 0.52 -0.12 -1.5708 0 0</pose>
+        <inertial>
+          <mass>0.8</mass>
+          <inertia>
+            <ixx>0.007</ixx>
+            <iyy>0.007</iyy>
+            <izz>0.013</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.18</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>0.5</mu2>
+                <slip1>0.02</slip1>
+                <slip2>0.02</slip2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e5</kp>
+                <kd>1</kd>
+                <max_vel>0.5</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.18</radius>
+              <length>0.10</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.02 0.02 0.02 1</ambient>
+            <diffuse>0.05 0.05 0.05 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <link name="left_rear_wheel">
+        <pose relative_to="base_link">-0.48 0.52 -0.12 -1.5708 0 0</pose>
+        <inertial>
+          <mass>0.8</mass>
+          <inertia>
+            <ixx>0.007</ixx>
+            <iyy>0.007</iyy>
+            <izz>0.013</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.18</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>0.5</mu2>
+                <slip1>0.02</slip1>
+                <slip2>0.02</slip2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e5</kp>
+                <kd>1</kd>
+                <max_vel>0.5</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.18</radius>
+              <length>0.10</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.02 0.02 0.02 1</ambient>
+            <diffuse>0.05 0.05 0.05 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <link name="right_front_wheel">
+        <pose relative_to="base_link">0.48 -0.52 -0.12 -1.5708 0 0</pose>
+        <inertial>
+          <mass>0.8</mass>
+          <inertia>
+            <ixx>0.007</ixx>
+            <iyy>0.007</iyy>
+            <izz>0.013</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.18</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>0.5</mu2>
+                <slip1>0.02</slip1>
+                <slip2>0.02</slip2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e5</kp>
+                <kd>1</kd>
+                <max_vel>0.5</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.18</radius>
+              <length>0.10</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.02 0.02 0.02 1</ambient>
+            <diffuse>0.05 0.05 0.05 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <link name="right_rear_wheel">
+        <pose relative_to="base_link">-0.48 -0.52 -0.12 -1.5708 0 0</pose>
+        <inertial>
+          <mass>0.8</mass>
+          <inertia>
+            <ixx>0.007</ixx>
+            <iyy>0.007</iyy>
+            <izz>0.013</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.18</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>0.5</mu2>
+                <slip1>0.02</slip1>
+                <slip2>0.02</slip2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e5</kp>
+                <kd>1</kd>
+                <max_vel>0.5</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.18</radius>
+              <length>0.10</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.02 0.02 0.02 1</ambient>
+            <diffuse>0.05 0.05 0.05 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <joint name="left_front_wheel_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>left_front_wheel</child>
+        <axis>
+          <xyz expressed_in="__model__">0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+          <dynamics>
+            <damping>0.05</damping>
+            <friction>0.0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+
+      <joint name="left_rear_wheel_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>left_rear_wheel</child>
+        <axis>
+          <xyz expressed_in="__model__">0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+          <dynamics>
+            <damping>0.05</damping>
+            <friction>0.0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+
+      <joint name="right_front_wheel_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>right_front_wheel</child>
+        <axis>
+          <xyz expressed_in="__model__">0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+          <dynamics>
+            <damping>0.05</damping>
+            <friction>0.0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+
+      <joint name="right_rear_wheel_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>right_rear_wheel</child>
+        <axis>
+          <xyz expressed_in="__model__">0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+          <dynamics>
+            <damping>0.05</damping>
+            <friction>0.0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+
+      <plugin filename="gz-sim-diff-drive-system"
+              name="gz::sim::systems::DiffDrive">
+        <left_joint>left_front_wheel_joint</left_joint>
+        <left_joint>left_rear_wheel_joint</left_joint>
+        <right_joint>right_front_wheel_joint</right_joint>
+        <right_joint>right_rear_wheel_joint</right_joint>
+        <wheel_separation>1.04</wheel_separation>
+        <wheel_radius>0.18</wheel_radius>
+        <topic>/cmd_vel</topic>
+        <odom_topic>/odom</odom_topic>
+        <odom_publish_frequency>50</odom_publish_frequency>
+        <frame_id>odom</frame_id>
+        <child_frame_id>base_link</child_frame_id>
+        <min_linear_velocity>-2</min_linear_velocity>
+        <max_linear_velocity>2</max_linear_velocity>
+        <min_angular_velocity>-2</min_angular_velocity>
+        <max_angular_velocity>2</max_angular_velocity>
+      </plugin>
+    </model>
+
+  </world>
+</sdf>

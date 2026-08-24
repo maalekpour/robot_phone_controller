@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="3">
+
+  <name>robot_mobile_control</name>
+
+  <version>1.0.0</version>
+
+  <description>
+    Android USB controller for a ROS 2 Gazebo differential drive robot.
+  </description>
+
+  <maintainer email="ali.maalekpour@gmail.com">Ali</maintainer>
+
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>geometry_msgs</depend>
+
+  <exec_depend>ros_gz_bridge</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+
+</package>
