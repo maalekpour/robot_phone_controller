@@ -1,24 +1,33 @@
 # Robot Phone Controller
 
-A ROS 2 and Gazebo mobile robot controlled from an Android phone through a USB connection.
+A ROS 2 and Gazebo mobile robot controlled remotely from an Android phone through a USB connection.
 
-The project consists of:
+The project demonstrates communication between an Android application and a ROS 2 mobile robot running in Gazebo. The Android phone acts as the remote controller, while Ubuntu handles the ROS 2 and Gazebo simulation.
 
-* A differential-drive ground robot simulated in Gazebo
-* A ROS 2 Jazzy C++ control node
-* An Android controller application built with Android Studio
-* USB communication between the Android phone and Ubuntu through ADB reverse
+## Features
 
-## Demo Video
+- Differential-drive mobile robot simulated in Gazebo
+- ROS 2 Jazzy control node written in C++
+- Android controller application built with Android Studio
+- USB communication between Android and Ubuntu
+- ADB reverse port forwarding for communication
+- Real-time robot movement commands from the Android phone
+- ROS 2 integration between the Android controller and Gazebo simulation
 
-> Demo video of the Android controller driving the robot in Gazebo.
+## Demo
+
+### Robot Control Demo
+
+Click the image below to watch the demonstration video:
+
+[![Robot Phone Controller Demo](photo.jpg)](Robot-mobilephone.mp4)
+
+> The video demonstrates controlling the simulated mobile robot in Gazebo using the Android phone controller.
 
 <!--
-Upload the demo video to GitHub and replace the URL below.
-GitHub can generate an asset URL when a video is uploaded through an Issue, Release, or other supported GitHub interface.
+Replace `Robot-mobilephone.mp4` with the GitHub-hosted video URL after uploading
+the video through a GitHub Issue, Release, or another GitHub-supported asset upload method.
 -->
-(photo.jpg)
-[Watch Demo Video](Robot-mobilephone.mp4)
 
 ## Project Architecture
 
