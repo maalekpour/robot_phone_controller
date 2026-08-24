@@ -18,7 +18,7 @@ Upload the demo video to GitHub and replace the URL below.
 GitHub can generate an asset URL when a video is uploaded through an Issue, Release, or other supported GitHub interface.
 -->
 
-[Watch Demo Video](VIDEO_URL_HERE)
+[Watch Demo Video](Robot-mobilephone.mp4)
 
 ## Project Architecture
 
