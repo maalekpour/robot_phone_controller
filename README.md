@@ -17,7 +17,7 @@ The project consists of:
 Upload the demo video to GitHub and replace the URL below.
 GitHub can generate an asset URL when a video is uploaded through an Issue, Release, or other supported GitHub interface.
 -->
-
+(photo.jpg)
 [Watch Demo Video](Robot-mobilephone.mp4)
 
 ## Project Architecture
