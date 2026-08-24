@@ -1,5 +1,5 @@
 
-
+### Robot Control Demo
 https://github.com/user-attachments/assets/4e970ef8-02dd-4ff4-ac38-9b19954312de
 
 <img width="958" height="1280" alt="photo" src="https://github.com/user-attachments/assets/65c2924f-7a47-46a5-bbbb-f804935d0996" />
@@ -18,21 +18,6 @@ The project demonstrates communication between an Android application and a ROS 
 - ADB reverse port forwarding for communication
 - Real-time robot movement commands from the Android phone
 - ROS 2 integration between the Android controller and Gazebo simulation
-
-## Demo
-
-### Robot Control Demo
-
-Click the image below to watch the demonstration video:
-
-[![Robot Phone Controller Demo](<img width="958" height="1280" alt="photo" src="https://github.com/user-attachments/assets/65c2924f-7a47-46a5-bbbb-f804935d0996" />)]([Robot-mobilephone.mp4](https://github.com/user-attachments/assets/4e970ef8-02dd-4ff4-ac38-9b19954312de))
-
-> The video demonstrates controlling the simulated mobile robot in Gazebo using the Android phone controller.
-
-<!--
-Replace `Robot-mobilephone.mp4` with the GitHub-hosted video URL after uploading
-the video through a GitHub Issue, Release, or another GitHub-supported asset upload method.
--->
 
 ## Project Architecture
 
