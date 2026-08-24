@@ -1,3 +1,8 @@
+
+
+https://github.com/user-attachments/assets/4e970ef8-02dd-4ff4-ac38-9b19954312de
+
+<img width="958" height="1280" alt="photo" src="https://github.com/user-attachments/assets/65c2924f-7a47-46a5-bbbb-f804935d0996" />
 # Robot Phone Controller
 
 A ROS 2 and Gazebo mobile robot controlled remotely from an Android phone through a USB connection.
@@ -20,7 +25,7 @@ The project demonstrates communication between an Android application and a ROS 
 
 Click the image below to watch the demonstration video:
 
-[![Robot Phone Controller Demo](photo.jpg)](Robot-mobilephone.mp4)
+[![Robot Phone Controller Demo](<img width="958" height="1280" alt="photo" src="https://github.com/user-attachments/assets/65c2924f-7a47-46a5-bbbb-f804935d0996" />)]([Robot-mobilephone.mp4](https://github.com/user-attachments/assets/4e970ef8-02dd-4ff4-ac38-9b19954312de))
 
 > The video demonstrates controlling the simulated mobile robot in Gazebo using the Android phone controller.
 
